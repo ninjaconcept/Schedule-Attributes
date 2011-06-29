@@ -83,11 +83,7 @@ module ScheduleAtts
 
   # TODO: test this
   def self.parse_in_timezone(str)
-    if Time.respond_to? :zone
-      Time.zone.parse(str)
-    else
-      Time.parse(str)
-    end
+    Time.parse(str)
   end
 end
 
