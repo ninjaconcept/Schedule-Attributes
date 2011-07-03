@@ -28,7 +28,7 @@ module ScheduleAtts
       @schedule = IceCube::Schedule.new(options[:date], :duration => options[:duration])
       @schedule.add_recurrence_date(options[:date])
     else
-      @schedule = IceCube::Schedule.new(options[:start_date], :duration => options[:duration])
+      @schedule = IceCube::Schedule.new(options[:start_date], :duration => options[:duration]. :end_time => options[:end_time])
 
       rule = case options[:interval_unit]
         when 'day'
