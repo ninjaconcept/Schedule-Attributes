@@ -21,6 +21,7 @@ module ScheduleAtts
     options[:interval] = options[:interval].to_i
     options[:duration] = options[:duration].to_i if options.has_key?(:duration)
     options[:start_date] &&= ScheduleAttributes.parse_in_timezone(options[:start_date])
+    options[:end_time] &&= ScheduleAttributes.parse_in_timezone(options[:end_time])
     options[:date]       &&= ScheduleAttributes.parse_in_timezone(options[:date])
     options[:until_date] &&= ScheduleAttributes.parse_in_timezone(options[:until_date])
 
