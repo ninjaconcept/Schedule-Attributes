@@ -43,7 +43,8 @@ module ScheduleAtts
       @schedule.add_recurrence_rule(rule)
     end
 
-    self.schedule_yaml = @schedule.to_yaml
+    # Sometimes a newline isn't appended to end of this
+    self.schedule_yaml = @schedule.to_yaml + "\n"
   end
 
   def schedule_attributes
