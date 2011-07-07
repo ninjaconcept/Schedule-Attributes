@@ -2,6 +2,7 @@ require 'ice_cube'
 require 'active_support'
 require 'active_support/time_with_zone'
 require 'ostruct'
+require 'time'
 
 module ScheduleAtts
   # Your code goes here...
