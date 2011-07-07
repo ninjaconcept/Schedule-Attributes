@@ -25,7 +25,8 @@ module ScheduleAtts
     options[:end_time] &&= ScheduleAttributes.parse_in_timezone(options[:end_time])
     options[:date]       &&= ScheduleAttributes.parse_in_timezone(options[:date])
     options[:until_date] &&= ScheduleAttributes.parse_in_timezone(options[:until_date])
-
+    options[:repeat] ||= 0
+    
     if options[:repeat].to_i == 0
       @schedule = IceCube::Schedule.new(options[:date], :duration => options[:duration])
       @schedule.add_recurrence_date(options[:date])
