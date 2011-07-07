@@ -70,6 +70,16 @@ describe ScheduledModel do
           it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-1-7')).should be_false }
           it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-1-21')).should be_true }
         end
+        
+        context "given :interval_unit=>month & :ends=>eventually & :until_date" do
+          let(:schedule_attributes){ { :repeat => '1', :start_date => '1-1-1985', :interval_unit => 'month', :interval => '1' } }
+          its(:start_date){ should == Date.new(1985, 1, 1).to_time }
+          its(:rrules){ should == [IceCube::Rule.monthly] }
+          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-1-2')).should be_true }
+          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-1-4')).should be_true }
+          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-1-7')).should be_false }
+          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-1-21')).should be_true }
+        end
       end
 
       context "setting the schedule_yaml column" do
