@@ -52,15 +52,17 @@ The date at which the event starts repeating. Must be parseable by `Time.parse`.
 
 #### `:interval_unit`
 
-The interval unit by which the event repeats. Can be `"day"` or `"week"`. For example, if the even repeats every day, this would be `"day"`. If it repeats weekly, this would be `"week"`.
+The interval unit by which the event repeats. Can be `"day"`, `"week"`, `month`, `year`. For example, if the even repeats every day, this would be `"day"`. If it repeats weekly, this would be `"week"`.
 
 #### `:interval`
 
 The interval by which the event repeats. Should be an integer (in string format). For example, if the event repeats every other day, this parameter should be `2`, and `:interval_unit` should be `"day"`. If it repeats every other week, it should be `2` and interval unit should be `"week"`.
+*Please note that month and year do not support interval units at this time*
 
 #### `:sunday`, `:monday`, `:tuesday`, `:wednesday`, `:thursday`, `:friday`, `:saturday`
 
 Indicates with a `0` or `1` whether the event repeats on this day. For example, if the event repeats every other week on Tues and Thursday, then the parameters would include these: `:interval => "2", :interval_unit => "week", :tuesday => "1", :thursday => "1"`. These parameters are only used if `:repeat` is `1` and `:interval_unit` is `"week"`.
+*Repeat is 0 by default*
 
 ## `schedule_attributes`
 
