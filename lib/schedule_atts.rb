@@ -39,6 +39,8 @@ module ScheduleAtts
           IceCube::Rule.weekly(options[:interval]).day( *IceCube::DAYS.keys.select{|day| options[day].to_i == 1 } )
         when 'month'
           IceCube::Rule.monthly(options[:interval])
+        when 'year'
+          IceCube::Rule.yearly(options[:interval])
       end
 
       rule.until(options[:until_date]) if options[:ends] == 'eventually'
@@ -70,6 +72,8 @@ module ScheduleAtts
         end
       when IceCube::MonthlyRule
         atts[:interval_unit] = 'month'
+      when IceCube::YearlyRule
+        atts[:interval_unit] = 'year'
       end
 
       if rule.until_date

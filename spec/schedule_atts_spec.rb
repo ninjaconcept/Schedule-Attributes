@@ -72,13 +72,23 @@ describe ScheduledModel do
         end
         
         context "given :interval_unit=>month & :ends=>eventually & :until_date" do
-          let(:schedule_attributes){ { :repeat => '1', :start_date => '1-1-1985', :interval_unit => 'month', :interval => '1' } }
+          let(:schedule_attributes){ { :repeat => '1', :start_date => '1-1-1985', :interval_unit => 'month', :interval => '1', :ends => 'never' } }
           its(:start_date){ should == Date.new(1985, 1, 1).to_time }
           its(:rrules){ should == [IceCube::Rule.monthly] }
-          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-1-2')).should be_true }
-          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-1-4')).should be_true }
-          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-1-7')).should be_false }
-          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-1-21')).should be_true }
+          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-1-1')).should be_true }
+          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-2-1')).should be_true }
+          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-2-2')).should be_false }
+          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-4-1')).should be_true }
+        end
+        
+        context "given :interval_unit=>year & :ends=>eventually & :until_date" do
+          let(:schedule_attributes){ { :repeat => '1', :start_date => '1-1-1985', :interval_unit => 'year', :interval => '1', :ends => 'never' } }
+          its(:start_date){ should == Date.new(1985, 1, 1).to_time }
+          its(:rrules){ should == [IceCube::Rule.yearly] }
+          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1985-1-1')).should be_true }
+          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1986-1-1')).should be_true }
+          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1986-1-2')).should be_false }
+          it { subject.occurs_at?(ScheduleAttributes.parse_in_timezone('1987-1-1')).should be_true }
         end
       end
 
