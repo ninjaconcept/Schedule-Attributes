@@ -57,7 +57,7 @@ module ScheduleAtts
 
     if rule = schedule.rrules.first
       atts[:repeat]     = 1
-      atts[:start_date] = schedule.start_date.to_date
+      atts[:start_date] = schedule.start_date.try(:to_date)
       atts[:date]       = Date.today # for populating the other part of the form
 
       rule_hash = rule.to_hash
