@@ -18,6 +18,13 @@ module ScheduleAtts
   end
 
   def schedule_attributes=(options)
+    unless options[:start_date]
+      # Try get date from datepiker
+      if options["start_date(1i)"] && options["start_date(2i)"] && options["start_date(3i)"]
+        options[:start_date] = Date.civil(options["start_date(1i)"].to_i, options["start_date(2i)"].to_i, options["start_date(3i)"].to_i).to_s
+      end
+    end
+    
     options = options.dup
     options[:interval] = options[:interval].to_i
     options[:duration] = options[:duration].to_i if options.has_key?(:duration)
